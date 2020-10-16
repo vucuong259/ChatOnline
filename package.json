@@ -1,0 +1,28 @@
+{
+    "name": "chatonline",
+    "version": "1.0.0",
+    "description": "Chat Online",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "babel-node src/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vucuong259/ChatOnline.git"
+    },
+    "author": "Cuongvm",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vucuong259/ChatOnline/issues"
+    },
+    "homepage": "https://github.com/vucuong259/ChatOnline#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mongoose": "^5.10.9"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.7.0"
+    }
+}
