@@ -78,6 +78,8 @@ typings/
 # Next.js build output
 .next
 
+src/public/bower_components
+
 # Nuxt.js build / generate output
 .nuxt
 dist
