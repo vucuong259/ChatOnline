@@ -5,6 +5,8 @@ import initRoutes from './routes';
 import bodyParser from 'body-parser';
 import connectFlash from 'connect-flash';
 import configSession from './config/session';
+import passport from 'passport';
+
 let app = express();
 // connect mongoose db
 connectDb();
@@ -17,7 +19,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Enable flash message
 app.use(connectFlash());
-
+//Config passport Js
+app.use(passport.initialize());
+app.use(passport.session());
 // init all routes
 initRoutes(app);
 

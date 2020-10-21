@@ -1,4 +1,4 @@
-import UserModel from './../models/UserModel';
+import UserModel from './../models/userModel';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { transError, transSuccess, transMail } from './../../lang/vi';
