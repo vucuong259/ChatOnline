@@ -45,7 +45,8 @@ let initPassportLocal = () => {
         // only save user._id
         done(null, user._id);
     });
-
+    // this is called by passport session()
+    // return userInfo to req.user
     passport.deserializeUser((id, done) => {
         UserModel.findUserById(id)
             .then(user => {

@@ -1,5 +1,6 @@
-import { validationResult } from 'express-validator'
-import { auth } from './../services/index'
+import { validationResult } from 'express-validator';
+import { auth } from './../services/index';
+import { transSuccess } from './../../lang/vi';
 class AuthController {
     getLoginRegister(req, res) {
         return res.render('auth/master', {
@@ -44,6 +45,23 @@ class AuthController {
             req.flash('errors', errorArr);
             return res.redirect('/login-register');
         }
+    }
+    getLogOut(req, res) {
+        req.logout();
+        req.flash('success', transSuccess.logout_success);
+        return res.redirect('/login-register');
+    }
+    checkLoggedIn(req, res, next) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/login-register');
+        }
+        next();
+    }
+    checkLoggedOut(req, res, next) {
+        if (req.isAuthenticated()) {
+            return res.redirect('/');
+        }
+        next();
     }
 }
 module.exports = new AuthController;
