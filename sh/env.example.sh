@@ -12,3 +12,7 @@ export MAIL_USER=***
 export MAIL_PASSWORD=***
 export MAIL_HOST=***
 export MAIL_PORT=***
+
+export FB_APP_ID=***
+export FB_APP_SECRET=***
+export FB_CALLBACK_URL=***
