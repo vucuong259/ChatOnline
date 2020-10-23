@@ -78,16 +78,28 @@ $(document).ready(function() {
             processData: false,
             data: userAvatar,
             success: function(result) {
-                //
+                //display success message
+                $('.user-modal-alert-success').find('span').text(result.message);
+                $('.user-modal-alert-success').css('display', 'block');
+                // update avatar at navbar
+                $('#navbar-avatar').attr('src', result.imageSrc);
+                // update origin avatar src
+                originAvatarSrc = result.imageSrc;
+                //reset all
+                $('#input-btn-cancel-update-user').click();
             },
-            error: function(err) {
-                //
+            error: function(error) {
+                $('.user-modal-alert-error').find('span').text(error.responseText);
+                $('.user-modal-alert-error').css('display', 'block');
+                //reset all
+                $('#input-btn-cancel-update-user').click();
             }
         });
     });
     $('#input-btn-cancel-update-user').bind('click', function() {
         userAvatar = null;
         userInfo = null;
+        $('#input-change-avatar').val(null);
         $('#user-modal-avatar').attr('src', originAvatarSrc);
     });
 
