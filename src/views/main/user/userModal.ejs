@@ -48,16 +48,12 @@
                 </div>
                 <!-- edit form column -->
                 <div class="col-md-9 personal-info">
-                  <div
-                    class="alert alert-danger alert-dismissable user-modal-alert-error"
-                  >
+                  <div class="alert alert-danger alert-dismissable user-modal-alert-error">
                     <a class="panel-close close" data-dismiss="alert">×</a>
                     <span>Update user error example.</span>
                   </div>
 
-                  <div
-                    class="alert alert-success alert-dismissable user-modal-alert-success"
-                  >
+                  <div class="alert alert-success alert-dismissable user-modal-alert-success">
                     <a class="panel-close close" data-dismiss="alert">×</a>
                     <span>Update user success example.</span>
                   </div>
@@ -165,16 +161,15 @@
           </div>
           <div id="password-profile" class="tab-pane fade">
             <div class="col-md-9 personal-info">
-              <div class="alert alert-danger alert-dismissable">
-                <a class="panel-close close" data-dismiss="alert">×</a> Update
-                password error example<br />
-                <!-- <script>openProfilePasswordModal();</script> -->
+              <br>
+              <div class="alert alert-danger alert-dismissable user-modal-password-alert-error">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <span>Update user error example.</span>
               </div>
 
-              <div class="alert alert-success alert-dismissable">
-                <a class="panel-close close" data-dismiss="alert">×</a> Update
-                password success example<br />
-                <!-- <script>openProfilePasswordModal();</script> -->
+              <div class="alert alert-success alert-dismissable user-modal-password-alert-success">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <span>Update user success example.</span>
               </div>
 
               <h3>Thay đổi mật khẩu</h3>
@@ -184,6 +179,7 @@
                   <label class="col-md-4 control-label">Mật khẩu cũ</label>
                   <div class="col-md-8">
                     <input
+                      id="input-change-current-password"
                       class="form-control"
                       type="password"
                       name="current_password"
@@ -195,6 +191,7 @@
                   <label class="col-md-4 control-label">Mật khẩu mới</label>
                   <div class="col-md-8">
                     <input
+                      id="input-change-new-password"
                       class="form-control"
                       type="password"
                       name="new_password"
@@ -203,11 +200,10 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-md-4 control-label"
-                    >Nhập lại mật khẩu mới</label
-                  >
+                  <label class="col-md-4 control-label">Nhập lại mật khẩu mới</label>
                   <div class="col-md-8">
                     <input
+                      id="input-change-confirm-new-password"
                       class="form-control"
                       type="password"
                       name="confirm_new_password"
@@ -220,14 +216,14 @@
                   <div class="col-md-8">
                     <input
                       type="button"
-                      id="input-btn-update-user"
+                      id="input-btn-update-user-password"
                       class="btn btn-primary custom-background-btn-primary"
                       value="Lưu lại"
                     />
                     <span></span>
                     <input
                       type="button"
-                      id="input-btn-cancel-update-user"
+                      id="input-btn-cancel-update-user-password"
                       class="btn btn-default custom-background-btn-reset"
                       value="Hủy bỏ"
                     />
