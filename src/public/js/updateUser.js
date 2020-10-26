@@ -7,23 +7,25 @@ let userUpdatePasssword = {};
 function callLogout() {
   let timerInterval;
   Swal.fire({
-    position: 'top-end',
-    title: 'Tự động đăng xuất sau 5 giây.',
-    html: 'Thời gian: <strong></strong>',
+    position: "top-end",
+    title: "Tự động đăng xuất sau 5 giây.",
+    html: "Thời gian: <strong></strong>",
     timer: 5000,
     onBeforeOpen: () => {
       Swal.showLoading();
       timerInterval = setInterval(() => {
-       Swal.getContent().querySelector('strong').textContent = Math.ceil(Swal.getTimerLeft() / 1000); 
+        Swal.getContent().querySelector("strong").textContent = Math.ceil(
+          Swal.getTimerLeft() / 1000
+        );
       }, 1000);
     },
     onClose: () => {
       clearInterval(timerInterval);
-    }
+    },
   }).then((result) => {
-    $.get('/logout', function(){
+    $.get("/logout", function () {
       location.reload();
-    })
+    });
   });
 }
 
@@ -75,9 +77,19 @@ function updateUserInfo() {
   });
   $("#input-change-username").bind("change", function () {
     let username = $(this).val();
-    let regexUsername = new RegExp(/^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/);
-    if(!regexUsername.test(username) || username.length < 5 ||username.length > 17){
-      alertify.notify('Username giới hạn trong 5 - 17 ký tự và không được phép chứa ký tự đặc biệt.','error',7);
+    let regexUsername = new RegExp(
+      /^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/
+    );
+    if (
+      !regexUsername.test(username) ||
+      username.length < 5 ||
+      username.length > 17
+    ) {
+      alertify.notify(
+        "Username giới hạn trong 5 - 17 ký tự và không được phép chứa ký tự đặc biệt.",
+        "error",
+        7
+      );
       $(this).val(originUserInfo.username);
       delete userInfo.username;
       return false;
@@ -86,8 +98,12 @@ function updateUserInfo() {
   });
   $("#input-change-gender-male").bind("click", function () {
     let gender = $(this).val();
-    if(gender !== 'male'){
-      alertify.notify('Oops! Dữ liệu giới tính có vấn đề, bạn là hacker chăng?','error',7);
+    if (gender !== "male") {
+      alertify.notify(
+        "Oops! Dữ liệu giới tính có vấn đề, bạn là hacker chăng?",
+        "error",
+        7
+      );
       $(this).val(originUserInfo.gender);
       delete userInfo.gender;
       return false;
@@ -97,8 +113,12 @@ function updateUserInfo() {
   });
   $("#input-change-gender-female").bind("click", function () {
     let gender = $(this).val();
-    if(gender !== 'female'){
-      alertify.notify('Oops! Dữ liệu giới tính có vấn đề, bạn là hacker chăng?','error',7);
+    if (gender !== "female") {
+      alertify.notify(
+        "Oops! Dữ liệu giới tính có vấn đề, bạn là hacker chăng?",
+        "error",
+        7
+      );
       $(this).val(originUserInfo.gender);
       delete userInfo.gender;
       return false;
@@ -108,8 +128,8 @@ function updateUserInfo() {
   });
   $("#input-change-address").bind("change", function () {
     let address = $(this).val();
-    if(address.length < 5 || address.length > 100){
-      alertify.notify('Địa chỉ giới hạn khoảng 3 - 100 ký tự.','error',7);
+    if (address.length < 5 || address.length > 100) {
+      alertify.notify("Địa chỉ giới hạn khoảng 3 - 100 ký tự.", "error", 7);
       $(this).val(originUserInfo.address);
       delete userInfo.address;
       return false;
@@ -119,8 +139,12 @@ function updateUserInfo() {
   $("#input-change-phone").bind("change", function () {
     let phone = $(this).val();
     let regexPhone = new RegExp(/^(0)[0-9]{9,10}$/);
-    if(!regexPhone.test(phone)){
-      alertify.notify('Số điện thoại Việt Nam bắt đầu bằng số 0, giới hạn trong khoảng 10 - 11 ký tự.','error',7);
+    if (!regexPhone.test(phone)) {
+      alertify.notify(
+        "Số điện thoại Việt Nam bắt đầu bằng số 0, giới hạn trong khoảng 10 - 11 ký tự.",
+        "error",
+        7
+      );
       $(this).val(originUserInfo.phone);
       delete userInfo.phone;
       return false;
@@ -129,9 +153,15 @@ function updateUserInfo() {
   });
   $("#input-change-current-password").bind("change", function () {
     let currentPassword = $(this).val();
-    let regexPassword = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/);
-    if(!regexPassword.test(currentPassword)){
-      alertify.notify('Mật khẩu chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số, ký tự đặc biệt','error',7);
+    let regexPassword = new RegExp(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/
+    );
+    if (!regexPassword.test(currentPassword)) {
+      alertify.notify(
+        "Mật khẩu chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số, ký tự đặc biệt",
+        "error",
+        7
+      );
       $(this).val(null);
       delete userUpdatePasssword.currentPassword;
       return false;
@@ -141,9 +171,15 @@ function updateUserInfo() {
 
   $("#input-change-new-password").bind("change", function () {
     let newPassword = $(this).val();
-    let regexPassword = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/);
-    if(!regexPassword.test(newPassword)){
-      alertify.notify('Mật khẩu chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số, ký tự đặc biệt','error',7);
+    let regexPassword = new RegExp(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/
+    );
+    if (!regexPassword.test(newPassword)) {
+      alertify.notify(
+        "Mật khẩu chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số, ký tự đặc biệt",
+        "error",
+        7
+      );
       $(this).val(null);
       delete userUpdatePasssword.newPassword;
       return false;
@@ -153,21 +189,20 @@ function updateUserInfo() {
 
   $("#input-change-confirm-new-password").bind("change", function () {
     let confirmNewPassword = $(this).val();
-    if(!userUpdatePasssword.newPassword){
-      alertify.notify('Bạn chưa nhập mật khẩu mới!','error',7);
+    if (!userUpdatePasssword.newPassword) {
+      alertify.notify("Bạn chưa nhập mật khẩu mới!", "error", 7);
       $(this).val(null);
       delete userUpdatePasssword.confirmNewPassword;
       return false;
     }
-    if(confirmNewPassword !== userUpdatePasssword.newPassword){
-      alertify.notify('Nhập lại mật khẩu chưa chính xác!','error',7);
+    if (confirmNewPassword !== userUpdatePasssword.newPassword) {
+      alertify.notify("Nhập lại mật khẩu chưa chính xác!", "error", 7);
       $(this).val(null);
       delete userUpdatePasssword.confirmNewPassword;
       return false;
     }
     userUpdatePasssword.confirmNewPassword = confirmNewPassword;
   });
-
 }
 
 function callUpdateUserAvatar() {
@@ -207,11 +242,11 @@ function callUpdateUserInfo() {
       //display success message
       $(".user-modal-alert-success").find("span").text(result.message);
       $(".user-modal-alert-success").css("display", "block");
-			
-			// Update origin userInfo
-			originUserInfo = Object.assign(originUserInfo, userInfo)
-			// Update user at navbar
-			$('#navbar-username').text(originUserInfo.username);
+
+      // Update origin userInfo
+      originUserInfo = Object.assign(originUserInfo, userInfo);
+      // Update user at navbar
+      $("#navbar-username").text(originUserInfo.username);
       //reset all
       $("#input-btn-cancel-update-user").click();
     },
@@ -233,7 +268,7 @@ function callUpdateUserPassword() {
       //display success message
       $(".user-modal-password-alert-success").find("span").text(result.message);
       $(".user-modal-password-alert-success").css("display", "block");
-		
+
       //reset all
       $("#input-btn-cancel-update-user-password").click();
 
@@ -241,7 +276,9 @@ function callUpdateUserPassword() {
       callLogout();
     },
     error: function (error) {
-      $(".user-modal-password-alert-error").find("span").text(error.responseText);
+      $(".user-modal-password-alert-error")
+        .find("span")
+        .text(error.responseText);
       $(".user-modal-password-alert-error").css("display", "block");
       //reset all
       $("#input-btn-cancel-update-user-password").click();
@@ -294,33 +331,36 @@ $(document).ready(function () {
   });
 
   $("#input-btn-update-user-password").bind("click", function () {
-    if(!userUpdatePasssword.currentPassword || !userUpdatePasssword.newPassword || !userUpdatePasssword.confirmNewPassword){
-      alertify.notify('Bạn phải thay đổi đầy đủ thông tin','error',7);
+    if (
+      !userUpdatePasssword.currentPassword ||
+      !userUpdatePasssword.newPassword ||
+      !userUpdatePasssword.confirmNewPassword
+    ) {
+      alertify.notify("Bạn phải thay đổi đầy đủ thông tin", "error", 7);
       return false;
     }
     Swal.fire({
-      title: 'Bạn có chắc chắn muốn thay đổi mật khẩu',
+      title: "Bạn có chắc chắn muốn thay đổi mật khẩu",
       text: "Bạn không thể hoàn tác lại quá trình này",
-      icon: 'info',
+      icon: "info",
       showCancelButton: true,
-      confirmButtonColor: '#2ECC71',
-      cancelButtonColor: '#ff7675',
-      confirmButtonText: 'Xác nhận',
-      cancelButtonText: 'Hủy'
+      confirmButtonColor: "#2ECC71",
+      cancelButtonColor: "#ff7675",
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
     }).then((result) => {
-      if(!result.value){
-        $('#input-btn-cancel-update-user-password').click();
+      if (!result.value) {
+        $("#input-btn-cancel-update-user-password").click();
         return false;
       }
       callUpdateUserPassword();
-    })
-    
+    });
   });
 
   $("#input-btn-cancel-update-user-password").bind("click", function () {
     userUpdatePasssword = {};
-    $('#input-change-current-password').val(null);
-    $('#input-change-new-password').val(null);
-    $('#input-change-confirm-new-password').val(null);
+    $("#input-change-current-password").val(null);
+    $("#input-change-new-password").val(null);
+    $("#input-change-confirm-new-password").val(null);
   });
 });
