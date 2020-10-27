@@ -7,6 +7,7 @@ export const transValidation = {
     update_gender: 'Oops! Dữ liệu giới tính có vấn đề, bạn là hacker chăng?',
     update_address: 'Địa chỉ giới hạn khoảng 3 - 100 ký tự',
     update_phone: 'Số điện thoại Việt Nam bắt đầu bằng số 0, giới hạn trong khoảng 10 - 11 ký tự',
+    find_user: 'Lỗi từ khóa tìm kiếm, chỉ cho phép ký tự chữ cái và số, cho phép khoảng trống.'
 
 };
 
