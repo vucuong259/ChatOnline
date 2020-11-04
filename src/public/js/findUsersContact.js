@@ -15,11 +15,13 @@ function callFindUsers(element){
     
     $.get(`/contact/find-users/${keyword}`, function(data){
       $('#find-user ul').html(data);
+      addContact(); //js/addContact.js
+      removeRequestContact(); //js/removeRequestContact.js
     });
   }
 }
 
 $(document).ready(function(){
   $("#input-find-users-contact").bind("keypress", callFindUsers);
-  $("#btn-find-user-contact").bind("click", callFindUsers);
+  $("#btn-find-users-contact").bind("click", callFindUsers);
 });
