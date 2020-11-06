@@ -22,6 +22,19 @@ class NotificationService {
       }
     })
   };
+/* 
+  Count all notification unread
+*/
+  countNotifUnread(currentUserId){
+    return new Promise(async (resolve, reject) => {
+      try {
+        let notificationsUnread = await NotificationModel.model.countNotifUnread(currentUserId);
+        resolve(notificationsUnread);
+      } catch (error) {
+        reject(error);
+      }
+    })
+  };
 }
 
 module.exports = new NotificationService
