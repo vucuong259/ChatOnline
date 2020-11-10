@@ -55,6 +55,22 @@ class NotificationService {
       }
     })
   };
+/* 
+  Mark notification as read
+  @param {string} currentUserId
+  @param {array} targetUsers
+*/
+  markAllAsRead(currentUserId, targetUsers){
+    return new Promise(async (resolve, reject) => {
+      try {
+        await NotificationModel.model.markAllAsRead(currentUserId, targetUsers);
+        resolve(true);
+      } catch (error) {
+        console.log(`Error when notification as read: ${error}`);
+        reject(false);
+      }
+    })
+  };
 }
 
 module.exports = new NotificationService
