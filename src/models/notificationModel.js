@@ -42,6 +42,14 @@ NotificationSchema.statics = {
                 {"isRead": false}
             ]
         }).exec();
+    },
+    /* 
+        Read more notifications
+    */
+    readMore(userId, skip, limit){
+        return this.find({
+            "receiverId": userId,
+        }).sort({"createdAt": -1}).skip(skip).limit(limit).exec();
     }
 }
 
