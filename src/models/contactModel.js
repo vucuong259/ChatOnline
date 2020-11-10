@@ -47,6 +47,62 @@ ContactSchema.statics = {
                 {"contactId": contactId}
             ]
         }).exec();
+    },
+    getContacts(userId, limit) {
+        return this.find({
+            $and:[
+                {$or:[{
+                    "userId": userId
+                },{
+                    "contactId": userId
+                }]},
+                {"status": true}
+            ]
+        }).sort({"createdAt": -1}).limit(limit).exec();
+    },
+    getContactSent(userId, limit) {
+        return this.find({
+            $and:[
+                {"userId": userId},
+                {"status": false}
+            ]
+        }).sort({"createdAt": -1}).limit(limit).exec();
+    },
+    getContactReceived(userId, limit) {
+        return this.find({
+            $and:[
+                {"contactId": userId},
+                {"status": false}
+            ]
+        }).sort({"createdAt": -1}).limit(limit).exec();
+    },
+    countAllContacts(userId) {
+        return this.countDocuments({
+            $and:[
+                {$or:[{
+                    "userId": userId
+                },{
+                    "contactId": userId
+                }]},
+                {"status": true}
+            ]
+        }).exec();
+    },
+    countAllContactsSent(userId) {
+        return this.countDocuments({
+            $and:[
+                {"userId": userId},
+                {"status": false}
+            ]
+        }).exec();
+    },
+    countAllContactsReceived(userId) {
+        return this.countDocuments({
+            $and:[
+                {"contactId": userId},
+                {"status": false}
+            ]
+        }).exec();
     }
 };
 
