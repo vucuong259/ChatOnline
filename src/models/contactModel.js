@@ -33,8 +33,24 @@ ContactSchema.statics = {
                     {"contactId": contactId}
                 ]},
                 {$and:[
+                    {"contactId": userId},
+                    {"userId": contactId}
+                ]}
+            ]
+        }).exec();
+    },
+    removeContact(userId, contactId){
+        return this.deleteOne({
+            $or:[
+                {$and:[
+                    {"userId": userId},
                     {"contactId": contactId},
-                    {"userId": userId}
+                    {"status": true}
+                ]},
+                {$and:[
+                    {"contactId": userId},
+                    {"userId": contactId},
+                    {"status": true}
                 ]}
             ]
         }).exec();
