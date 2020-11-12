@@ -50,9 +50,9 @@ class ContactService {
     });
   }
 
-  removeRequestContact(currentUserId, contactId) {
+  removeRequestContactSent(currentUserId, contactId) {
     return new Promise(async (resolve, reject) => {
-      let removeReq = await ContactModel.removeRequestContact(
+      let removeReq = await ContactModel.removeRequestContactSent(
         currentUserId,
         contactId
       );
@@ -60,7 +60,7 @@ class ContactService {
         return reject(false);
       }
       //remove notification
-      await NotificationModel.model.removeRequestContactNotification(
+      await NotificationModel.model.removeRequestContactSentNotification(
         currentUserId,
         contactId,
         NotificationModel.types.ADD_CONTACT

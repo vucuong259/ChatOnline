@@ -35,12 +35,12 @@ class ContactController {
       return res.status(500).send(error);
     }
   };
-  async removeRequestContact(req, res){
+  async removeRequestContactSent(req, res){
     try {
       let currentUserId = req.user._id;
       let contactId = req.body.uid;
 
-      let removeReq = await contact.removeRequestContact(currentUserId, contactId);
+      let removeReq = await contact.removeRequestContactSent(currentUserId, contactId);
       return res.status(200).send({success:!!removeReq});
     } catch (error) {
       return res.status(500).send(error);
