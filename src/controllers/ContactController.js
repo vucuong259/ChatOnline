@@ -23,7 +23,7 @@ class ContactController {
     } catch (error) {
       return res.status(500).send(error);
     }
-  }
+  };
   async addNew(req, res){
     try {
       let currentUserId = req.user._id;
@@ -34,7 +34,7 @@ class ContactController {
     } catch (error) {
       return res.status(500).send(error);
     }
-  }
+  };
   async removeRequestContact(req, res){
     try {
       let currentUserId = req.user._id;
@@ -45,8 +45,41 @@ class ContactController {
     } catch (error) {
       return res.status(500).send(error);
     }
-  }
-  
+  };
+  async readMoreContacts(req, res){
+    try {
+      // get skipNumber from query param
+      let skipNumberContacts = +(req.query.skipNumber);
+      // get more item
+      let newContactsUsers = await contact.readMoreContacts(req.user._id, skipNumberContacts);
+      return res.status(200).send(newContactsUsers);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  };
+  async readMoreContactsSent(req, res){
+    try {
+      // get skipNumber from query param
+      let skipNumberContacts = +(req.query.skipNumber);
+      // get more item
+      let newContactsUsers = await contact.readMoreContactsSent(req.user._id, skipNumberContacts);
+      return res.status(200).send(newContactsUsers);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  };
+
+  async readMoreContactsReceived(req, res){
+    try {
+      // get skipNumber from query param
+      let skipNumberContacts = +(req.query.skipNumber);
+      // get more item
+      let newContactsUsers = await contact.readMoreContactsReceived(req.user._id, skipNumberContacts);
+      return res.status(200).send(newContactsUsers);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  };
 
 }
 
