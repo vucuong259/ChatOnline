@@ -68,6 +68,24 @@ class ContactService {
       resolve(true);
     });
   }
+  removeRequestContactReceived(currentUserId, contactId) {
+    return new Promise(async (resolve, reject) => {
+      let removeReq = await ContactModel.removeRequestContactReceived(
+        currentUserId,
+        contactId
+      );
+      if (removeReq.n === 0) {
+        return reject(false);
+      }
+      //remove notification chức năng này chưa muốn làm
+      // await NotificationModel.model.removeRequestContactSentNotification(
+      //   currentUserId,
+      //   contactId,
+      //   NotificationModel.types.ADD_CONTACT
+      // );
+      resolve(true);
+    });
+  }
   getContacts(currentUserId) {
     return new Promise(async (resolve, reject) => {
       try {

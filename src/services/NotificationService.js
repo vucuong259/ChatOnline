@@ -10,7 +10,7 @@ class NotificationService {
   getNotifications(currentUserId){
     return new Promise(async (resolve, reject) => {
       try {
-        let notifications = await NotificationModel.model.getByUserIdAndLimit(currentUserId, LIMIT_NUMER_TAKEN);
+        let notifications = await NotificationModel.model.getByUserIdAndLimit(currentUserId, 10);
         let getNotifContent = notifications.map(async (notification) => {
           let sender = await UserModel.getNormalUserDataById(notification.senderId);
           return NotificationModel.contents.getContent(notification.type, notification.isRead, sender._id, sender.username, sender.avatar);
