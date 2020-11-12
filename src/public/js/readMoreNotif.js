@@ -14,7 +14,7 @@ $(document).ready(function(){
         return false;
       }
       notifications.forEach(function (notification) {
-        $(".list-notifications").append(`<li>${notification}</li>`); //modal notif
+        $("ul.list-notifications").append(`<li>${notification}</li>`); //modal notif
       });
       $("#link-read-more-notif").css("display", "inline-block");
       $(".read-more-notif-loader").css("display", "none");
