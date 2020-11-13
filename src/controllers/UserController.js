@@ -40,8 +40,8 @@ class UserController {
         };
         // Update user
         let userUpdate = await user.updateUser(req.user._id, updateUserItem);
-        //remove old user avatar
-        await fsExtra.remove(`${app.avatar_directory}/${userUpdate.avatar}`);
+        //không xóa avatar cũ của người dùng vì trong bảng message cần để sử dụng
+        // await fsExtra.remove(`${app.avatar_directory}/${userUpdate.avatar}`);
         let result = {
           message: transSuccess.user_info_updated,
           imageSrc: `/images/users/${req.file.filename}`,
