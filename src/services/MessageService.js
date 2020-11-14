@@ -46,9 +46,6 @@ class MessageService {
           return -item.updatedAt;
         });
         resolve({
-          userConversations: userConversations,
-          groupConversations: groupConversations,
-          allConversations: allConversations,
           allConversationsWithMessages: allConversationsWithMessages
         });
       } catch (error) {
