@@ -173,6 +173,23 @@ ContactSchema.statics = {
                 {"status": false}
             ]
         }).sort({"createdAt": -1}).skip(skip).limit(limit).exec();
+    },
+
+    updateWhenHasNewMessage(userId, contactId){
+        return this.updateOne({
+            $or:[
+                {$and:[
+                    {"userId": userId},
+                    {"contactId": contactId}
+                ]},
+                {$and:[
+                    {"contactId": userId},
+                    {"userId": contactId}
+                ]}
+            ]
+        },{
+            "updatedAt": Date.now()
+        }).exec();
     }
 };
 
