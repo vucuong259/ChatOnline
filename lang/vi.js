@@ -7,7 +7,8 @@ export const transValidation = {
     update_gender: 'Oops! Dữ liệu giới tính có vấn đề, bạn là hacker chăng?',
     update_address: 'Địa chỉ giới hạn khoảng 3 - 100 ký tự',
     update_phone: 'Số điện thoại Việt Nam bắt đầu bằng số 0, giới hạn trong khoảng 10 - 11 ký tự',
-    find_user: 'Lỗi từ khóa tìm kiếm, chỉ cho phép ký tự chữ cái và số, cho phép khoảng trống.'
+    keyword_find_user: 'Lỗi từ khóa tìm kiếm, chỉ cho phép ký tự chữ cái và số, cho phép khoảng trống.',
+    message_text_emoji_incorrect: 'Tin nhắn không hợp lệ. Đảm bảo tối thiểu 1 ký tự, tối đa 400 ký tự'
 
 };
 
@@ -22,6 +23,7 @@ export const transError = {
     avatar_type: 'Kiểu file không hợp lệ, chỉ chấp nhận jpg & png.',
     avatar_size: 'Ảnh upload tối đa cho phép là 1M',
     user_current_password_failed: 'Mật khẩu hiện tại không chính xác.',
+    converstation_not_found: 'Cuộc trò chuyện không tồn tại'
 };
 
 export const transSuccess = {

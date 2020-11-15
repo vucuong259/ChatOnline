@@ -1,6 +1,6 @@
 import express from 'express';
-import { home, auth, user, contact, notification } from './../controllers';
-import { authValid, userValid, contactValid } from './../validation';
+import { home, auth, user, contact, notification, message } from './../controllers';
+import { authValid, userValid, contactValid, messageValid } from './../validation';
 import passport from 'passport';
 import initPassportLocal from './../controllers/passportController/local';
 import initPassportFacebook from './../controllers/passportController/facebook';
@@ -49,7 +49,7 @@ let initRoutes = (app) => {
     router.put('/user/update-password', auth.checkLoggedIn, userValid.updatePassword, user.updatePassword);
 
 
-    router.get('/contact/find-users/:keyword', auth.checkLoggedIn, contact.findUsersContact);
+    router.get('/contact/find-users/:keyword', auth.checkLoggedIn, contactValid.findUsersContact, contact.findUsersContact);
     router.post('/contact/add-new', auth.checkLoggedIn, contact.addNew);
     router.delete('/contact/remove-contact', auth.checkLoggedIn, contact.removeContact);
     
@@ -63,8 +63,9 @@ let initRoutes = (app) => {
 
     router.get('/notification/read-more', auth.checkLoggedIn, notification.readMore);
     router.put('/notification/mark-all-as-read', auth.checkLoggedIn, notification.markAllAsRead);
-    
 
+    router.post("/message/add-new-text-emoji", auth.checkLoggedIn, messageValid.checkMessageLength, message.addNewTextEmoji);
+    
     return app.use('/', router);
 };
 module.exports = initRoutes;
