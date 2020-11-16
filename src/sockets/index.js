@@ -3,6 +3,7 @@ import removeRequestContactSent from "./contact/removeRequestContactSent";
 import removeRequestContactReceived from "./contact/removeRequestContactReceived";
 import approveRequestContactReceived from "./contact/approveRequestContactReceived";
 import removeContact from "./contact/removeContact";
+import chatTextEmoji from "./chat/chatTextEmoji";
 /* 
   Param: io from socket.io lib
 */
@@ -12,6 +13,7 @@ let initSockets = (io) => {
   removeRequestContactReceived(io);
   removeContact(io);
   approveRequestContactReceived(io);
+  chatTextEmoji(io);
   //
 }
 
