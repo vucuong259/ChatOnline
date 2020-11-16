@@ -49,14 +49,14 @@ MessageSchema.statics = {
                     {"receiverId": senderId}
                 ]}
             ]
-        }).sort({"createdAt":1}).limit(limit).exec();
+        }).sort({"createdAt": -1}).limit(limit).exec();
     },
     /* 
         @param {string} receiverId id of group chat
         @param {number} limit
     */
     getMessagesIsGroup(receiverId, limit){
-        return this.find({"receiverId": receiverId}).sort({"createdAt":1}).limit(limit).exec();
+        return this.find({"receiverId": receiverId}).sort({"createdAt": -1}).limit(limit).exec();
     }
 }
 
