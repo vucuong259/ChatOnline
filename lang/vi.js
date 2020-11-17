@@ -21,7 +21,9 @@ export const transError = {
     login_failed: 'Sai tài khoản hoặc mật khẩu!',
     server_error: 'Có lỗi ở phía server, vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi để báo cáo lỗi này. Xin cám ơn!',
     avatar_type: 'Kiểu file không hợp lệ, chỉ chấp nhận jpg & png.',
+    image_message_type: 'Kiểu file không hợp lệ, chỉ chấp nhận jpg & png.',
     avatar_size: 'Ảnh upload tối đa cho phép là 1M',
+    image_message_size: 'Ảnh upload tối đa cho phép là 1M',
     user_current_password_failed: 'Mật khẩu hiện tại không chính xác.',
     converstation_not_found: 'Cuộc trò chuyện không tồn tại'
 };
