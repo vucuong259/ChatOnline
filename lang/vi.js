@@ -24,6 +24,7 @@ export const transError = {
     image_message_type: 'Kiểu file không hợp lệ, chỉ chấp nhận jpg & png.',
     avatar_size: 'Ảnh upload tối đa cho phép là 1M',
     image_message_size: 'Ảnh upload tối đa cho phép là 1M',
+    file_message_size: 'Ảnh upload tối đa cho phép là 10M',
     user_current_password_failed: 'Mật khẩu hiện tại không chính xác.',
     converstation_not_found: 'Cuộc trò chuyện không tồn tại'
 };
