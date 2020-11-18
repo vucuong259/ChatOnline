@@ -23,6 +23,21 @@ let imageMessageUploadFile = multer({
   storage: storageImageChat,
   limits: { fileSize: app.image_message_limit_size },
 }).single("my-image-chat");
+
+let storageFileChat = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, app.image_message_directory);
+  },
+  filename: (req, file, callback) => {
+    let fileName = `${file.originalname}`;
+    callback(null, fileName);
+  },
+});
+
+let fileMessageUploadFile = multer({
+  storage: storageFileChat,
+  limits: { fileSize: app.file_message_limit_size },
+}).single("my-attach-chat");
 class MessageController {
   async addNewTextEmoji(req, res){
     let errorArr = [];
@@ -69,6 +84,35 @@ class MessageController {
         let newMessage = await message.addNewImage(sender, receiverId, messageVal, isChatGroup);
 
         // remove image, because this image is saved to mongodb        
+        await fsExtra.remove(`${app.image_message_directory}/${newMessage.file.fileName}`);
+
+        return res.status(200).send({message: newMessage});
+      } catch (error) {
+        return res.status(500).send(error);
+      }
+    });
+    
+  };
+  addNewFile(req, res){
+    fileMessageUploadFile(req, res,async (error) => {
+      if (error) {
+        if (error.message) {
+          return res.status(500).send(transError.file_message_size);
+        }
+        return res.status(500).send(error);
+      }
+      try {
+        let sender = {
+          id: req.user._id,
+          name: req.user.username,
+          avatar: req.user.avatar,
+        };
+        let receiverId = req.body.uid;
+        let messageVal = req.file;
+        let isChatGroup = req.body.isChatGroup;
+        let newMessage = await message.addNewFile(sender, receiverId, messageVal, isChatGroup);
+
+        //remove image, because this image is saved to mongodb        
         await fsExtra.remove(`${app.image_message_directory}/${newMessage.file.fileName}`);
 
         return res.status(200).send({message: newMessage});

@@ -179,7 +179,9 @@ function changScreenChat(){
     // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
     enableEmojioneArea(divId);
     // Bật lắng nghe DOM cho việc chat hình ảnh
-    imageChat(divId)
+    imageChat(divId);
+    imageFile(divId);
+
   });
 }
 
