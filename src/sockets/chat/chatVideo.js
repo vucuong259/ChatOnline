@@ -31,7 +31,7 @@ let chatVideo = (io) => {
         listenerId: data.listenerId,
         callerName: data.callerName,
         listenerName: data.listenerName,
-        listenerPeerId: data.getPeerId
+        listenerPeerId: data.listenerPeerId
       };
 
       if(clients[data.callerId]){
@@ -45,7 +45,7 @@ let chatVideo = (io) => {
         listenerId: data.listenerId,
         callerName: data.callerName,
         listenerName: data.listenerName,
-        listenerPeerId: data.getPeerId
+        listenerPeerId: data.listenerPeerId
       };
 
       if(clients[data.listenerId]){
@@ -59,7 +59,7 @@ let chatVideo = (io) => {
         listenerId: data.listenerId,
         callerName: data.callerName,
         listenerName: data.listenerName,
-        listenerPeerId: data.getPeerId
+        listenerPeerId: data.listenerPeerId
       };
 
       if(clients[data.listenerId]){
@@ -72,7 +72,7 @@ let chatVideo = (io) => {
         listenerId: data.listenerId,
         callerName: data.callerName,
         listenerName: data.listenerName,
-        listenerPeerId: data.getPeerId
+        listenerPeerId: data.listenerPeerId
       };
 
       if(clients[data.callerId]){
@@ -85,7 +85,7 @@ let chatVideo = (io) => {
         listenerId: data.listenerId,
         callerName: data.callerName,
         listenerName: data.listenerName,
-        listenerPeerId: data.getPeerId
+        listenerPeerId: data.listenerPeerId
       };
 
       if(clients[data.callerId]){
