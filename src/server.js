@@ -64,7 +64,7 @@ io.use(passportSocketIo.authorize({
 initSockets(io);
 
 let host = 'localhost';
-let port = 2509;
+let port = process.env.PORT || '2509';
 
 server.listen(port, host, () => {
     console.log(`Starting at ${host}:${port}/`);

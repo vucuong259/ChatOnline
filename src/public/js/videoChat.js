@@ -1,3 +1,19 @@
+function openStream(){
+  const config = { audio: false, video: true};
+  return navigator.mediaDevices.getUserMedia(config);
+}
+function playStream(idVideoTag, stream){
+  const video = document.getElementById(idVideoTag);
+  video.srcObject = stream;
+  video.play();
+}
+function stopStreamedVideo(idVideoTag) {
+  const video = document.getElementById(idVideoTag);
+  const localStream = video.srcObject;
+  localStream.getTracks()[0].stop();
+  video.src = '';
+  video.pause();
+}
 function videoChat(divId){
   $(`#video-chat-${divId}`).unbind("click").on("click", function(){
     let targetId = $(this).data("chat");
@@ -89,8 +105,29 @@ $(document).ready(function(){
           socket.on("server-send-accept-call-to-caller", function(response){
             Swal.close();
             clearInterval(timerInterval);
-            console.log(" Caller okkkkk");
+            $("#streamModal").modal("show");
+            openStream()
+              .then(stream => {
+                playStream('local-stream',stream);
+                const call = peer.call(response.listenerPeerId,stream);
+                call.on('stream', removeStream => playStream('remote-stream',removeStream));
+              });
+
+              $("#streamModal").unbind('hide.bs.modal').on('hide.bs.modal', function(){
+                stopStreamedVideo("remote-stream");
+                stopStreamedVideo("local-stream");
+                Swal.fire({
+                  type:"info",
+                  title: `Đã kết thúc cuộc gọi với &nbsp; <span style="color: #2ECC71;">${response.listenerName}</span>`,
+                  backdrop: "rgba(85,85,85, 0.4)",
+                  width: "52rem",
+                  allowOutsideClick: false,
+                  confirmButtonColor: '#2ECC71',
+                  confirmButtonText: 'Xác nhận',
+                })
+              });
           });
+          
         },
         onClose: () => {
           clearInterval(timerInterval);
@@ -151,8 +188,30 @@ $(document).ready(function(){
           socket.on("server-send-accept-call-to-listener", function(response){
             Swal.close();
             clearInterval(timerInterval);
-            console.log("Listener okkkkk");
+            $("#streamModal").modal("show");
+            peer.on("call", call => {
+              openStream()
+              .then(stream => {
+                call.answer(stream);
+                playStream('local-stream',stream);
+                call.on('stream', removeStream => playStream('remote-stream',removeStream));
+              })
+            });
+            $("#streamModal").unbind('hide.bs.modal').on('hide.bs.modal', function(){
+              stopStreamedVideo("remote-stream");
+              stopStreamedVideo("local-stream");
+              Swal.fire({
+                type:"info",
+                title: `Đã kết thúc cuộc gọi với &nbsp; <span style="color: #2ECC71;">${response.callerName}</span>`,
+                backdrop: "rgba(85,85,85, 0.4)",
+                width: "52rem",
+                allowOutsideClick: false,
+                confirmButtonColor: '#2ECC71',
+                confirmButtonText: 'Xác nhận',
+              })
+            });
           });
+          
 
         },
         onClose: () => {
